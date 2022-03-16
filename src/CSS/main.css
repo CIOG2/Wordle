@@ -1,3 +1,20 @@
+/*Variables de los colores*/
+:root{
+    /*Colores claros para el modo claro*/
+    --Primer-Color-Claro: #F5F5F5;
+    --Segundo-Color-Claro: #E0E0E0;
+    --Tercer-Color-Claro: #D8D8D8;
+    --Cuarto-Color-Claro: #BDBDBD;
+    --Quinto-Color-Claro: #9E9E9E;
+
+    /*Colores oscuros para el modo oscuro*/
+    --Primer-Color-Oscuro: #00191A;
+    --Segundo-Color-Oscuro: #212121;
+    --Tercer-Color-Oscuro: #616161;
+    --Cuarto-Color-Oscuro: #757575;
+    --Quinto-Color-Oscuro: #9E9E9E;
+}
+
 *{
     box-sizing: border-box;
     margin: 0;
@@ -13,4 +30,14 @@ body{
     width: 100%;
     height: 100vh;
     min-height: 500px;
+    background-color: var(--Primer-Color-Oscuro);
+}
+
+#app{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
 }
