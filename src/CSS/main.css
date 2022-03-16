@@ -1,0 +1,16 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html{
+    font-size: 62.5%;
+    font-family: sans-serif, Arial, Helvetica;
+}
+
+body{
+    width: 100%;
+    height: 100vh;
+    min-height: 500px;
+}
