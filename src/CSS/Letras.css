@@ -1,0 +1,61 @@
+.letras__container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: auto;   
+    margin-bottom: 20px;
+}
+
+.letras__linea{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 3px;
+    height: auto;
+    margin-top: 10px;
+}
+
+.letras__linea button{
+    width: 35px;
+    height: 35px;
+    font-size: 1.7rem;
+    font-weight: 500;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 1px solid #000;
+    box-shadow: -1px 1px 5px 0 #000000c9;
+}
+
+
+
+@media (min-width: 410px) {
+    .letras__container{ 
+        margin-bottom: 30px;
+    }
+    .letras__linea button{
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+    }
+}
+
+
+
+@media (min-width: 710px) {
+    .letras__container{ 
+        margin-bottom: 10px;
+    }
+    .letras__linea{
+        gap: 10px;
+    }
+
+    .letras__linea button{
+        width: 55px;
+        height: 55px;
+        border-radius: 10px;
+    }
+}
