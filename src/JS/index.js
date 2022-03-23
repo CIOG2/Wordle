@@ -1,5 +1,7 @@
-import ButtonMode from "./components/ButtonMode.js";
+import Header from "./components/Header.js"
+
+
+
 
 const app = document.getElementById('app');
-
-app.append(ButtonMode())
+app.append(Header());
