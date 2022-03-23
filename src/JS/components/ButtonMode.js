@@ -1,12 +1,5 @@
 import LocalStorage from "../utils/LocalStorage.js";
 
-// let data = [
-//     {buttonMode: false},
-// ];
-// LocalStorage().set('Wordle', data);
-
-// localStorage().remove('Wordle');
-
 const data = LocalStorage().get('Wordle');
 
 const ButtonMode = () => {
