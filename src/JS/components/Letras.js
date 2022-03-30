@@ -6,6 +6,7 @@ const crearBotones = (array) => {
         const button = document.createElement('button');
         button.classList.add('letras__button');
         button.innerText = element;
+        button.id = element;
         botones.push(button);
     });
 
