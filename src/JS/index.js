@@ -46,7 +46,9 @@ document.body.onclick = (e) => {
                 if(res.includes(palabra[i])){
                     let contenedor = document.getElementById(`contenedor${renglon}`).childNodes[i];
                     contenedor.style.backgroundColor = 'orange';    
-                    document.getElementById(palabra[i]).style.backgroundColor = 'orange';
+                    if (document.getElementById(palabra[i]).style.backgroundColor !== 'rgb(0, 161, 0)') {
+                        document.getElementById(palabra[i]).style.backgroundColor = 'orange';
+                    }
                 } else {
                     let contenedor = document.getElementById(`contenedor${renglon}`).childNodes[i];
                     contenedor.style.backgroundColor = 'rgb(112, 112, 112)';        
@@ -58,6 +60,12 @@ document.body.onclick = (e) => {
                     document.getElementById(palabra[i]).style.backgroundColor = 'rgb(0, 161, 0)';
                 }
             }
+
+            if (target.id === 'botonDone' && contador === respuesta.length && renglon === 5){
+                setTimeout(() => {
+                    alert('perdiste') 
+                }, 500);
+            } 
             contador = 0;
             palabra = '';
             renglon++;
