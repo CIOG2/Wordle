@@ -9,8 +9,12 @@ const ButtonMode = () => {
     const input = document.createElement('input');
     input.type = 'checkbox';
     input.id = 'button-mode';
-    input.checked = data[0].buttonMode;
-    if(data[0].buttonMode === false) {
+    if (data === null) {
+        input.checked = false;
+    } else {
+        input.checked = data[0].buttonMode;
+    }
+    if(data === null || data[0].buttonMode === false) {
         document.body.style.backgroundColor = '#f5f5f5';
     }else{
         document.body.style.backgroundColor = 'var(--Primer-Color-Oscuro)';
@@ -35,9 +39,16 @@ const ButtonMode = () => {
 
 
 function cambiarModo() {
-    const datos = LocalStorage().get('Wordle');
-    datos[0].buttonMode = !datos[0].buttonMode;
-    LocalStorage().set('Wordle', datos)
+    let datos = LocalStorage().get('Wordle');
+    if (datos === null) {
+        datos = [{
+            buttonMode: true
+        }];
+        LocalStorage().set('Wordle', datos)
+    } else {
+        datos[0].buttonMode = !datos[0].buttonMode;
+        LocalStorage().set('Wordle', datos)
+    }
 }
 
 export default ButtonMode;
