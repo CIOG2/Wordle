@@ -11,8 +11,10 @@ const app = document.getElementById('app');
 app.append( Header(), ContenedorLetras(respuesta), Letras() );
 
 
-
-
-document.body.onclick = (e) => {
-    Logica(e.target);
+document.onclick = (e) => {
+    Logica(e, 'TecladoVirtual');
 }
+
+document.addEventListener('keydown', (e) => {
+    Logica(e , 'TecladoFisico');
+});

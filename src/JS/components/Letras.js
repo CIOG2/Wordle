@@ -50,6 +50,7 @@ const Letras = () => {
     
     const letterContainer = document.createElement('div');
     letterContainer.classList.add('letras__container');
+    letterContainer.id = 'letterContainerss';
     letterContainer.append( Linea1, Linea2, Linea3 );
 
     return letterContainer;
