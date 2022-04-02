@@ -18,10 +18,13 @@
     margin-top: 5px;
 }
 
-.letras__button{
+.container__letras--button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 35px;
-    height: 35px;
-    font-size: 1.7rem;
+    height: 45px;
+    font-size: 1.9rem;
     font-weight: 500;
     border: none;
     border-radius: 5px;
@@ -29,7 +32,8 @@
     border: 1px solid #000;
     box-shadow: -1px 1px 5px 0 #000000c9;
     user-select: none;
-    transition: all .5s;
+    transition: all .5s;    
+    background-color: white;
 }
 
 
@@ -37,8 +41,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 45px;
-    height: 35px;
+    width: 50px;
+    height: 45px;
     font-size: 1.7rem;
     font-weight: 500;
     border: none;
@@ -57,8 +61,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 45px;
-    height: 35px;
+    width: 50px;
+    height: 45px;
     font-size: 1.7rem;
     font-weight: 500;
     border: none;
@@ -87,21 +91,21 @@
 
 @media (min-width: 410px) {
     .letras__container{ 
-        margin-bottom: 30px;
+        margin-bottom: 15px;
     }
-    .letras__button{
-        width: 40px;
-        height: 40px;
-        border-radius: 10px;
+    .container__letras--button{
+        width: 45px;
+        height: 55px;
+        border-radius: 8px;
     }
     .letras__button--done{
         width: 50px;
-        height: 40px;
+        height: 55px;
         border-radius: 10px;
     }
     .letras__button--borrar{
         width: 50px;
-        height: 40px;
+        height: 55px;
         border-radius: 10px;
     }
 }
@@ -116,7 +120,7 @@
         gap: 5px;
     }
 
-    .letras__button{
+    .container__letras--button{
         width: 55px;
         height: 55px;
         border-radius: 10px;

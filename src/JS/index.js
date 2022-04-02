@@ -3,7 +3,7 @@ import ContenedorLetras from "./components/ContenedorLetras.js";
 import Letras from "./components/Letras.js";
 import Logica from "./utils/Logica.js";
 
-const respuesta = "HELADO";
+const respuesta = "CARRO";
 
 
 

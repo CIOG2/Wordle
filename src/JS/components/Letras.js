@@ -3,8 +3,8 @@ const crearBotones = (array) => {
     const botones = [];
 
     array.forEach(element => {
-        const button = document.createElement('button');
-        button.classList.add('letras__button');
+        const button = document.createElement('div');
+        button.classList.add('container__letras--button');
         button.innerText = element;
         button.id = element;
         botones.push(button);

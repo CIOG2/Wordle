@@ -1,12 +1,15 @@
-const respuesta = "HELADO";
+const respuesta = "CARRO";
 let palabra = '';
 let contador = 0;
 let renglon = 0;
-const letras = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'ñ', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+const letras = [
+    'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'ñ', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+    'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'Ñ', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
+];
 
 const Logica = ( evento, tipoTeclado) =>{
 
-    if(evento.target.classList.contains('letras__button') || letras.includes(evento.key) ) {
+    if(evento.target.classList.contains('container__letras--button') || letras.includes(evento.key) ) {
         if(palabra.length < respuesta.length){    
             if (palabra === '') {
                 if (tipoTeclado === 'TecladoFisico') {

@@ -3,7 +3,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    gap: 5px;
+    gap: 2px;
     width: 100%;
     height: auto;
     max-width: 600px;
@@ -11,7 +11,7 @@
 
 .letras__contenedor{
     display: flex;
-    gap: 5px;
+    gap: 2px;
     width: auto;
     height: auto;
 }
@@ -28,6 +28,7 @@
     font-weight: 600;
     color: black;
     transition: all .5s;
+    user-select: none;
 }
 
 
