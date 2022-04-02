@@ -1,4 +1,4 @@
-const respuesta = "BOTES";
+const respuesta = "HELADO";
 let palabra = '';
 let contador = 0;
 let renglon = 0;
@@ -38,30 +38,14 @@ const Logica = ( evento, tipoTeclado) =>{
                 document.getElementById(palabra[i]).style.backgroundColor = 'rgb(0, 161, 0)';
             }    
             setTimeout(() => {
-                alert('Ganaste')
+                swal('Easy', 'Felicidades, Ganaste el juego!', 'success')
             }, 500); 
         } else {
             let res = respuesta.split('');
             palabra = palabra.split('');
             for (let i = 0; i < respuesta.length; i++) {                
-                if(res.includes(palabra[i])){
-                        let contenedor = document.getElementById(`contenedor${renglon}`).childNodes[i];
-                    contenedor.style.backgroundColor = 'orange';    
-                    if (document.getElementById(palabra[i]).style.backgroundColor !== 'rgb(0, 161, 0)') {
-                        document.getElementById(palabra[i]).style.backgroundColor = 'orange';
-                    }
-                } else {
-                    let contenedor = document.getElementById(`contenedor${renglon}`).childNodes[i];
-                    contenedor.style.backgroundColor = 'rgb(112, 112, 112)';        
-                    document.getElementById(palabra[i]).style.backgroundColor = 'rgb(112, 112, 112)';
-                }
-                if (res[i] === palabra[i]) {
-                    let contenedor = document.getElementById(`contenedor${renglon}`).childNodes[i];
-                    contenedor.style.backgroundColor = 'rgb(0, 161, 0)';
-                    document.getElementById(palabra[i]).style.backgroundColor = 'rgb(0, 161, 0)';
-                }
+                validacionEfecto(palabra, res, i);                    
             }
-            
             if (evento.target.id === 'botonDone' && contador === respuesta.length && renglon === 5){
                 setTimeout(() => {
                     alert('perdiste') 
@@ -80,5 +64,29 @@ const Logica = ( evento, tipoTeclado) =>{
         }
     }
 }
+
+const validacionEfecto = (palabra, res, i) => {
+    setTimeout(() => {
+        if(res.includes(palabra[i])){
+            let contenedor = document.getElementById(`contenedor${renglon-1}`).childNodes[i];
+        contenedor.style.backgroundColor = 'orange';    
+        if (document.getElementById(palabra[i]).style.backgroundColor !== 'rgb(0, 161, 0)') {
+            document.getElementById(palabra[i]).style.backgroundColor = 'orange';
+        }
+        } else {
+            let contenedor = document.getElementById(`contenedor${renglon-1}`).childNodes[i];
+            contenedor.style.backgroundColor = 'rgb(112, 112, 112)';        
+            document.getElementById(palabra[i]).style.backgroundColor = 'rgb(112, 112, 112)';
+        }
+        if (res[i] === palabra[i]) {
+            let contenedor = document.getElementById(`contenedor${renglon-1}`).childNodes[i];
+            contenedor.style.backgroundColor = 'rgb(0, 161, 0)';
+            document.getElementById(palabra[i]).style.backgroundColor = 'rgb(0, 161, 0)';
+        }
+        document.getElementById(`contenedor${renglon-1}`).childNodes[i].classList.add('efecto-de-rotacion');
+    }, 500 * i);
+}
+
+
 
 export default Logica;
