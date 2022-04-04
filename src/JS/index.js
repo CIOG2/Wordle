@@ -1,7 +1,7 @@
 import Header from "./components/Header.js"
 import ContenedorLetras from "./components/ContenedorLetras.js";
 import Letras from "./components/Letras.js";
-import Logica from "./utils/Logica.js";
+import { Logica } from "./utils/Logica.js";
 
 const respuesta = "CARRO";
 

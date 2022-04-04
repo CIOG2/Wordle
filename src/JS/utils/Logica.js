@@ -92,4 +92,4 @@ const validacionEfecto = (palabra, res, i) => {
 
 
 
-export default Logica;
+export { Logica, letras };
