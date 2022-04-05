@@ -12,9 +12,9 @@ const ButtonMode = () => {
     if (data === null) {
         input.checked = false;
     } else {
-        input.checked = data[0].buttonMode;
+        input.checked = data.buttonMode;
     }
-    if(data === null || data[0].buttonMode === false) {
+    if(data === null || data.buttonMode === false) {
         document.body.style.backgroundColor = '#f5f5f5';
     }else{
         document.body.style.backgroundColor = 'var(--Primer-Color-Oscuro)';
@@ -41,12 +41,12 @@ const ButtonMode = () => {
 function cambiarModo() {
     let datos = LocalStorage().get('Wordle');
     if (datos === null) {
-        datos = [{
+        datos = {
             buttonMode: true
-        }];
+        };
         LocalStorage().set('Wordle', datos)
     } else {
-        datos[0].buttonMode = !datos[0].buttonMode;
+        datos.buttonMode = !datos.buttonMode;
         LocalStorage().set('Wordle', datos)
     }
 }

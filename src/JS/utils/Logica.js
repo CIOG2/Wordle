@@ -1,3 +1,5 @@
+import LetrasLocalStorage from "./LetrasLocalStorage.js";
+
 const respuesta = "CARRO";
 let palabra = '';
 let contador = 0;
@@ -19,16 +21,20 @@ const Logica = ( evento, tipoTeclado) =>{
                     document.getElementById(`contenedor${renglon}`).childNodes[contador].textContent = evento.target.textContent;
                     palabra = evento.target.innerText;
                 }
+
+                LetrasLocalStorage(renglon, palabra, false);
                 contador++;
             }else{
                 if (tipoTeclado === 'TecladoFisico') {
                     document.getElementById(`contenedor${renglon}`).childNodes[contador].textContent = evento.key.toUpperCase();
                     palabra += evento.key.toUpperCase();
-
+                    
                 } else {
                     document.getElementById(`contenedor${renglon}`).childNodes[contador].textContent = evento.target.textContent;
                     palabra += evento.target.innerText;
                 }
+
+                LetrasLocalStorage(renglon, palabra, false);
                 contador++;
             }
         }
@@ -44,6 +50,8 @@ const Logica = ( evento, tipoTeclado) =>{
                 swal('Easy', 'Felicidades, Ganaste el juego!', 'success')
             }, 500); 
         } else {
+            
+            LetrasLocalStorage(renglon, palabra, true);
             let res = respuesta.split('');
             palabra = palabra.split('');
             for (let i = 0; i < respuesta.length; i++) {                
@@ -53,7 +61,8 @@ const Logica = ( evento, tipoTeclado) =>{
                 setTimeout(() => {
                     alert('perdiste') 
                 }, 500);
-            } 
+            }
+            
             contador = 0;
             palabra = '';
             renglon++;
@@ -64,6 +73,7 @@ const Logica = ( evento, tipoTeclado) =>{
             palabra = palabra.substring(0, letras-1);
             contador--;
             document.getElementById(`contenedor${renglon}`).childNodes[contador].textContent = '';
+            LetrasLocalStorage(renglon, palabra, false);
         }
     }
 }
