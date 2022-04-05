@@ -18,7 +18,6 @@ const LetrasLocalStorage = (renglon, palabra, checked) => {
         letras: palabra.split(''),
         checked: checked,
     }
-    
 
     Object.assign(data, {palabras: palabras});
     LocalStorage().set('Wordle', data);

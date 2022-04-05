@@ -44,3 +44,13 @@
         transform: rotateX(360deg);
     }
 }
+
+
+@media screen and (min-width: 700px){    
+    .letras__contenedor{
+        gap: 4px;
+    }    
+    .contenedor__Principal{
+        gap: 4px;
+    }
+}
