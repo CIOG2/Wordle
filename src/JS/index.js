@@ -20,3 +20,5 @@ document.onclick = (e) => {
 document.addEventListener('keydown', (e) => {
     Logica(e , 'TecladoFisico');
 });
+
+console.log(LocalStorage().get('Wordle'));
