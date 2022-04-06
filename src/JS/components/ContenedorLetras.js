@@ -1,4 +1,4 @@
-const ContenedorLetras = (palabra) => {
+const ContenedorLetras = (zize) => {
     
     const contenedorCuadros = [];
 
@@ -7,7 +7,7 @@ const ContenedorLetras = (palabra) => {
         contenedor.classList.add('letras__contenedor');
         contenedor.id = `contenedor${i}`;
 
-        for (let j = 0; j < palabra.length; j++) {
+        for (let j = 0; j < zize; j++) {
             const cuadro = document.createElement('div');
             cuadro.classList.add('letras__cuadro');
             contenedor.appendChild(cuadro);

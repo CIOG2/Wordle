@@ -6,12 +6,14 @@ import { Validacion } from "./utils/Logica.js";
 import LocalStorage from "./utils/LocalStorage.js";
 import RenderLetrasLocalStorage from "./utils/RenderLetrasLocalStorage.js";
 
-const respuesta = "CARRO";
 const data = LocalStorage().get('Wordle');
 
+if (data[0]) {
+    LocalStorage().remove('Wordle');
+}
 
 const app = document.getElementById('app');
-app.append( Header(), ContenedorLetras(respuesta), Letras() );
+app.append( Header(), ContenedorLetras(5), Letras() );
 
 if (!(data === null)) {
     if (Object.keys(data).includes('palabras')) {
