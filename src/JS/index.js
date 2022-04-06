@@ -8,8 +8,10 @@ import RenderLetrasLocalStorage from "./utils/RenderLetrasLocalStorage.js";
 
 const data = LocalStorage().get('Wordle');
 
-if (data[0]) {
-    LocalStorage().remove('Wordle');
+if (!(data === null)) {
+    if (data[0]) {
+        LocalStorage().remove('Wordle');
+    }    
 }
 
 const app = document.getElementById('app');
