@@ -1,4 +1,5 @@
 import LetrasLocalStorage from "./LetrasLocalStorage.js";
+import LocalStorage from "./LocalStorage.js";
 
 const respuesta = "CARRO";
 let palabra = '';
@@ -30,7 +31,11 @@ const Validacion = (evento, tipoTeclado) => {
             EliminarLetras();
         }
     } else {
-        AgregarLetras(Letra);
+        if (evento === 'TecladoLocalStorage') {
+            ValidarLetras('TecladoLocalStorage');
+        } else {
+            AgregarLetras(evento);
+        }
     }
 }
 
@@ -52,10 +57,7 @@ const AgregarLetras = (Letra) => {
     }
 }
 
-const ValidarLetras = (tipoTeclado) => {
-    console.log(tipoTeclado);
-    
-    
+const ValidarLetras = (tipoTeclado) => {    
     if (palabra === respuesta) {
         palabra = palabra.split('');
         for (let i = 0; i < respuesta.length; i++) {                
@@ -80,7 +82,11 @@ const ValidarLetras = (tipoTeclado) => {
         }
         if (contador === respuesta.length && renglon === 5){
             setTimeout(() => {
-                alert('perdiste') 
+                let data = LocalStorage().get('Wordle');
+                data.palabras = [];
+                LocalStorage().set('Wordle', data);
+
+                swal(':(', 'Lo sentimos, perdiste el juego!', 'error');
             }, 2500);
         }
         

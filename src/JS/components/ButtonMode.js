@@ -14,7 +14,7 @@ const ButtonMode = () => {
     } else {
         input.checked = data.buttonMode;
     }
-    if(data === null || data.buttonMode === false) {
+    if((data === null || data.buttonMode === undefined) || data.buttonMode === false) {
         document.body.style.backgroundColor = '#f5f5f5';
     }else{
         document.body.style.backgroundColor = 'var(--Primer-Color-Oscuro)';

@@ -18,7 +18,6 @@ if (!(data === null)) {
         RenderLetrasLocalStorage(data.palabras);
     }
 }
-
 document.onclick = (e) => {
     Validacion(e, 'TecladoVirtual');
 }
