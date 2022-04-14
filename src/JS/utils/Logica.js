@@ -1,7 +1,11 @@
 import LetrasLocalStorage from "./LetrasLocalStorage.js";
 import LocalStorage from "./LocalStorage.js";
+import { descifrar } from "./cifrarTexto.js";
+import data from '../data/palabras.js';
 
-const respuesta = "CARRO";
+console.log(data[1]);
+console.log(descifrar(data[1]));
+let respuesta = "CARRO";
 let palabra = '';
 let contador = 0;
 let renglon = 0;
