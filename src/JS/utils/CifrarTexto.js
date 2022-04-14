@@ -19,4 +19,4 @@ const CifrarTexto = () => {
         cifrar,
         descifrar,
     };    
-}
+};
