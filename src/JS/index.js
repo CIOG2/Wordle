@@ -1,9 +1,9 @@
-import Header from "./components/Header.js"
-import ContenedorLetras from "./components/ContenedorLetras.js";
-import Letras from "./components/Letras.js";
-import { Validacion } from "./utils/Logica.js";
-import LocalStorage from "./utils/LocalStorage.js";
-import RenderLetrasLocalStorage from "./utils/RenderLetrasLocalStorage.js";
+    import Header from "./components/Header.js"
+    import ContenedorLetras from "./components/ContenedorLetras.js";
+    import Letras from "./components/Letras.js";
+    import { Validacion } from "./utils/Logica.js";
+    import LocalStorage from "./utils/LocalStorage.js";
+    import RenderLetrasLocalStorage from "./utils/RenderLetrasLocalStorage.js";
 import GanasteAlerta from "./components/GanasteAlerta.js";
 
 

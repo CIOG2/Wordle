@@ -2,10 +2,36 @@ import LetrasLocalStorage from "./LetrasLocalStorage.js";
 import LocalStorage from "./LocalStorage.js";
 import { descifrar } from "./cifrarTexto.js";
 import data from '../data/palabras.js';
+import NumerosAleatorios from "./NumerosAleatorios.js";
 
-console.log(data[1]);
-console.log(descifrar(data[1]));
-let respuesta = "CARRO";
+let localStorageData = LocalStorage().get('Wordle');
+
+
+console.log(localStorageData);
+if(localStorageData === null){
+    let datos = {
+        orden: {
+            ordenPalabras: NumerosAleatorios(data.length),
+            position: 0
+        }
+    };
+    LocalStorage().set('Wordle', datos);
+    localStorageData = datos;
+} else {
+    if (!localStorageData.orden) {
+        let datos = {
+            orden: {
+                ordenPalabras: NumerosAleatorios(data.length),
+                position: 0
+            }
+        };
+        LocalStorage().set('Wordle', datos);
+        localStorageData = datos;
+    }
+}
+console.log( descifrar(data[localStorageData.orden.ordenPalabras[localStorageData.orden.position]]));
+
+let respuesta = descifrar(data[localStorageData.orden.ordenPalabras[localStorageData.orden.position]]);
 let palabra = '';
 let contador = 0;
 let renglon = 0;
@@ -68,9 +94,16 @@ const ValidarLetras = (tipoTeclado) => {
             let contenedor = document.getElementById(`contenedor${renglon}`).childNodes[i];
             contenedor.style.backgroundColor = 'rgb(0, 161, 0)';
             document.getElementById(palabra[i]).style.backgroundColor = 'rgb(0, 161, 0)';
-        }    
+        }  
         setTimeout(() => {
-            swal('Easy', 'Felicidades, Ganaste el juego!', 'success')
+            swal('Easy', 'Felicidades, Ganaste el juego!', 'success');
+            localStorageData.palabras = [];
+            localStorageData.orden.position = localStorageData.orden.position++;
+            localStorageData.orden.position = parseInt(localStorageData.orden.position) + 1;
+            LocalStorage().set('Wordle', localStorageData);
+            palabra = '';
+            contador = 0;
+            renglon = 0;
         }, 500); 
     } else {
         
