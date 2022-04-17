@@ -3,11 +3,10 @@ import LocalStorage from "./LocalStorage.js";
 import { descifrar } from "./cifrarTexto.js";
 import data from '../data/palabras.js';
 import NumerosAleatorios from "./NumerosAleatorios.js";
+import Limpieza from "./Limpieza.js";
 
 let localStorageData = LocalStorage().get('Wordle');
 
-
-console.log(localStorageData);
 if(localStorageData === null){
     let datos = {
         orden: {
@@ -29,15 +28,14 @@ if(localStorageData === null){
         localStorageData = datos;
     }
 }
-console.log( descifrar(data[localStorageData.orden.ordenPalabras[localStorageData.orden.position]]));
 
 let respuesta = descifrar(data[localStorageData.orden.ordenPalabras[localStorageData.orden.position]]);
 let palabra = '';
 let contador = 0;
 let renglon = 0;
 const letras = [
-    'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'ñ', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-    'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'Ñ', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
+    'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'Ñ', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+    'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'ñ', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
 ];
 
 
@@ -74,13 +72,13 @@ const AgregarLetras = (Letra) => {
         if (palabra === '') {
             document.getElementById(`contenedor${renglon}`).childNodes[contador].textContent = Letra;
             palabra = Letra;
-    
+            
             LetrasLocalStorage(renglon, palabra, false);
             contador++;
         }else{
             document.getElementById(`contenedor${renglon}`).childNodes[contador].textContent = Letra;
             palabra += Letra;
-        
+            
             LetrasLocalStorage(renglon, palabra, false);
             contador++;
         }
@@ -97,13 +95,11 @@ const ValidarLetras = (tipoTeclado) => {
         }  
         setTimeout(() => {
             swal('Easy', 'Felicidades, Ganaste el juego!', 'success');
-            localStorageData.palabras = [];
-            localStorageData.orden.position = localStorageData.orden.position++;
-            localStorageData.orden.position = parseInt(localStorageData.orden.position) + 1;
-            LocalStorage().set('Wordle', localStorageData);
             palabra = '';
             contador = 0;
             renglon = 0;
+            respuesta = descifrar(data[localStorageData.orden.ordenPalabras[parseInt(Data.orden.position) + 1]]);
+            Limpieza();
         }, 500); 
     } else {
         
@@ -119,14 +115,13 @@ const ValidarLetras = (tipoTeclado) => {
         }
         if (contador === respuesta.length && renglon === 5){
             setTimeout(() => {
-                let data = LocalStorage().get('Wordle');
-                data.palabras = [];
-                LocalStorage().set('Wordle', data);
-
                 swal(':(', 'Lo sentimos, perdiste el juego!', 'error');
+                contador = 0;
+                palabra = '';
+                renglon= 0;
+                Limpieza();
             }, 2500);
         }
-        
         contador = 0;
         palabra = '';
         renglon++;
@@ -142,9 +137,6 @@ const EliminarLetras = () => {
         LetrasLocalStorage(renglon, palabra, false);    
     }
 }
-
-
-
 
 
 
@@ -192,4 +184,4 @@ const validacionLetrasSinEfecto = (palabra, res, i) => {
 
 
 
-export { Validacion };
+export { Validacion, letras};
