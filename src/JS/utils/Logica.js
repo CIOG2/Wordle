@@ -1,6 +1,6 @@
 import LetrasLocalStorage from "./LetrasLocalStorage.js";
 import LocalStorage from "./LocalStorage.js";
-import { descifrar } from "./cifrarTexto.js";
+import { descifrar } from "./CifrarTexto.js";
 import data from '../data/palabras.js';
 import NumerosAleatorios from "./NumerosAleatorios.js";
 import Limpieza from "./Limpieza.js";
