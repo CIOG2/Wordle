@@ -30,6 +30,7 @@ if(localStorageData === null){
 }
 
 let respuesta = descifrar(data[localStorageData.orden.ordenPalabras[localStorageData.orden.position]]);
+console.log(respuesta);
 let palabra = '';
 let contador = 0;
 let renglon = 0;
@@ -62,26 +63,30 @@ const Validacion = (evento, tipoTeclado) => {
         if (evento === 'TecladoLocalStorage') {
             ValidarLetras('TecladoLocalStorage');
         } else {
-            AgregarLetras(evento);
+            AgregarLetras(evento, 'TecladoLocalStorage');
         }
     }
 }
 
-const AgregarLetras = (Letra) => {
-    if(palabra.length < respuesta.length){    
-        if (palabra === '') {
-            document.getElementById(`contenedor${renglon}`).childNodes[contador].textContent = Letra;
-            palabra = Letra;
-            
-            LetrasLocalStorage(renglon, palabra, false);
-            contador++;
-        }else{
-            document.getElementById(`contenedor${renglon}`).childNodes[contador].textContent = Letra;
-            palabra += Letra;
-            
-            LetrasLocalStorage(renglon, palabra, false);
-            contador++;
+const AgregarLetras = (Letra, tipoTeclado) => {
+    if(palabra.length < respuesta.length){
+        const contadorLetra = document.getElementById(`contenedor${renglon}`).childNodes[contador]; 
+
+        if (!(tipoTeclado === 'TecladoLocalStorage')) {
+            contadorLetra.classList.add('AnimacionLetras');    
+            setTimeout(() => {
+                contadorLetra.classList.remove('AnimacionLetras');
+            }, 100);
         }
+        if (palabra === '') {
+            contadorLetra.textContent = Letra;
+            palabra = Letra;
+        }else{
+            contadorLetra.textContent = Letra;
+            palabra += Letra;
+        }
+        LetrasLocalStorage(renglon, palabra, false);
+        contador++;
     }
 }
 
@@ -130,11 +135,18 @@ const ValidarLetras = (tipoTeclado) => {
 
 const EliminarLetras = () => {
     if (!(palabra === '')) {
-        let letras = palabra.length;
-        palabra = palabra.substring(0, letras-1);
         contador--;
-        document.getElementById(`contenedor${renglon}`).childNodes[contador].textContent = '';
+        const letras = palabra.length;
+        const contadorLetras = document.getElementById(`contenedor${renglon}`).childNodes[contador];
+        
+        palabra = palabra.substring(0, letras-1);
+        contadorLetras.textContent = '';
+        contadorLetras.classList.add('AnimacionLetras');    
+        
         LetrasLocalStorage(renglon, palabra, false);    
+        setTimeout(() => {
+            contadorLetras.classList.remove('AnimacionLetras');
+        }, 100);
     }
 }
 
@@ -142,21 +154,23 @@ const EliminarLetras = () => {
 
 const validacionLetrasEfecto = (palabra, res, i) => {
     setTimeout(() => {
+        let contenedor = document.getElementById(`contenedor${renglon-1}`).childNodes[i];
+        let letraContenedorColor = document.getElementById(palabra[i]);
+        
         if(res.includes(palabra[i])){
-            let contenedor = document.getElementById(`contenedor${renglon-1}`).childNodes[i];
-        contenedor.style.backgroundColor = 'orange';    
-        if (document.getElementById(palabra[i]).style.backgroundColor !== 'rgb(0, 161, 0)') {
-            document.getElementById(palabra[i]).style.backgroundColor = 'orange';
-        }
+            contenedor.style.backgroundColor = 'orange';    
+        
+            if (letraContenedorColor.style.backgroundColor !== 'rgb(0, 161, 0)') {
+                letraContenedorColor.style.backgroundColor = 'orange';
+            }
         } else {
-            let contenedor = document.getElementById(`contenedor${renglon-1}`).childNodes[i];
             contenedor.style.backgroundColor = 'rgb(112, 112, 112)';        
-            document.getElementById(palabra[i]).style.backgroundColor = 'rgb(112, 112, 112)';
+            letraContenedorColor.style.backgroundColor = 'rgb(112, 112, 112)';
         }
+        
         if (res[i] === palabra[i]) {
-            let contenedor = document.getElementById(`contenedor${renglon-1}`).childNodes[i];
             contenedor.style.backgroundColor = 'rgb(0, 161, 0)';
-            document.getElementById(palabra[i]).style.backgroundColor = 'rgb(0, 161, 0)';
+            letraContenedorColor.style.backgroundColor = 'rgb(0, 161, 0)';
         }
         document.getElementById(`contenedor${renglon-1}`).childNodes[i].classList.add('efecto-de-rotacion');
     }, 450 * i);
@@ -164,22 +178,24 @@ const validacionLetrasEfecto = (palabra, res, i) => {
 
 
 const validacionLetrasSinEfecto = (palabra, res, i) => {
-    if(res.includes(palabra[i])){
         let contenedor = document.getElementById(`contenedor${renglon}`).childNodes[i];
-        contenedor.style.backgroundColor = 'orange';    
-    if (document.getElementById(palabra[i]).style.backgroundColor !== 'rgb(0, 161, 0)') {
-        document.getElementById(palabra[i]).style.backgroundColor = 'orange';
-    }
-    } else {
-        let contenedor = document.getElementById(`contenedor${renglon}`).childNodes[i];
-        contenedor.style.backgroundColor = 'rgb(112, 112, 112)';        
-        document.getElementById(palabra[i]).style.backgroundColor = 'rgb(112, 112, 112)';
-    }
-    if (res[i] === palabra[i]) {
-        let contenedor = document.getElementById(`contenedor${renglon}`).childNodes[i];
-        contenedor.style.backgroundColor = 'rgb(0, 161, 0)';
-        document.getElementById(palabra[i]).style.backgroundColor = 'rgb(0, 161, 0)';
-    }
+        let letraContenedorColor = document.getElementById(palabra[i]);
+        
+        if(res.includes(palabra[i])){
+            contenedor.style.backgroundColor = 'orange';    
+        
+            if (letraContenedorColor.style.backgroundColor !== 'rgb(0, 161, 0)') {
+                letraContenedorColor.style.backgroundColor = 'orange';
+            }
+        } else {
+            contenedor.style.backgroundColor = 'rgb(112, 112, 112)';        
+            letraContenedorColor.style.backgroundColor = 'rgb(112, 112, 112)';
+        }
+        
+        if (res[i] === palabra[i]) {
+            contenedor.style.backgroundColor = 'rgb(0, 161, 0)';
+            letraContenedorColor.style.backgroundColor = 'rgb(0, 161, 0)';
+        }
 }
 
 

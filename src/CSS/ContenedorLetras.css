@@ -32,6 +32,20 @@
 }
 
 
+.AnimacionLetras{
+    animation: pop .4s;
+}
+
+@keyframes pop{
+    0%{
+        transform: scale(0.9);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
+
+
 .efecto-de-rotacion{
     animation: rotar .5s linear;
 }
