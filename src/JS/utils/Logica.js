@@ -43,7 +43,7 @@ const letras = [
 const Validacion = (evento, tipoTeclado) => {
     if (tipoTeclado === 'TecladoFisico') {
         if (letras.includes(evento.key)) {
-            AgregarLetras(evento.key.toUpperCase());
+            AgregarLetras(evento.key.toUpperCase(), 'TecladoFisico');
         } else if (evento.key == 'Enter' && contador == respuesta.length){
             ValidarLetras(tipoTeclado);
         } else if (evento.key === 'Backspace' ){
@@ -52,7 +52,7 @@ const Validacion = (evento, tipoTeclado) => {
     } 
     else if (tipoTeclado === 'TecladoVirtual') {    
         if(evento.target.classList.contains('container__letras--button')){
-            AgregarLetras(evento.target.textContent);
+            AgregarLetras(evento.target.textContent, 'TecladoVirtual');
         } else if (evento.target.id == 'botonDone' && contador == respuesta.length) {
             ValidarLetras(tipoTeclado);
         } else if( evento.target.id === 'botonBorrar'){
@@ -73,6 +73,7 @@ const AgregarLetras = (Letra, tipoTeclado) => {
 
         if (!(tipoTeclado === 'TecladoLocalStorage')) {
             contadorLetra.classList.add('AnimacionLetras');    
+            console.log('entro');
             setTimeout(() => {
                 contadorLetra.classList.remove('AnimacionLetras');
             }, 100);
