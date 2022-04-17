@@ -4,6 +4,7 @@ const data = LocalStorage().get('Wordle');
 
 const ButtonMode = () => {
     const label = document.createElement('label');
+    label.textContent = 'Modo Boton';
     label.classList.add('switch');
 
     const input = document.createElement('input');

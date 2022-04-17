@@ -30,6 +30,7 @@ if(localStorageData === null){
 }
 
 let respuesta = descifrar(data[localStorageData.orden.ordenPalabras[localStorageData.orden.position]]);
+console.log(respuesta);
 let palabra = '';
 let contador = 0;
 let renglon = 0;
@@ -98,7 +99,7 @@ const ValidarLetras = (tipoTeclado) => {
             palabra = '';
             contador = 0;
             renglon = 0;
-            respuesta = descifrar(data[localStorageData.orden.ordenPalabras[parseInt(Data.orden.position) + 1]]);
+            respuesta = descifrar(data[localStorageData.orden.ordenPalabras[parseInt(localStorageData.orden.position) + 1]]);
             Limpieza();
         }, 500); 
     } else {
@@ -159,7 +160,7 @@ const validacionLetrasEfecto = (palabra, res, i) => {
             document.getElementById(palabra[i]).style.backgroundColor = 'rgb(0, 161, 0)';
         }
         document.getElementById(`contenedor${renglon-1}`).childNodes[i].classList.add('efecto-de-rotacion');
-    }, 500 * i);
+    }, 450 * i);
 }
 
 

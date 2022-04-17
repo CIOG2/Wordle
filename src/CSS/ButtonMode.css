@@ -7,8 +7,9 @@
     display: inline-block;
     width: 3.5em;
     height: 2em;
-    box-shadow: -1px 1px 4px 0px rgb(0 0 0 / 72%);;
+    box-shadow: -1px 1px 4px 0px rgb(0 0 0 / 72%);
     border-radius: 20px;
+    color: transparent;
 }
 
 /* Hide default HTML checkbox */
