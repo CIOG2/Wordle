@@ -5,6 +5,7 @@ import data from '../data/palabras.js';
 import NumerosAleatorios from "./NumerosAleatorios.js";
 import Limpieza from "./Limpieza.js";
 
+
 let localStorageData = LocalStorage().get('Wordle');
 
 if(localStorageData === null){
@@ -29,7 +30,9 @@ if(localStorageData === null){
     }
 }
 
+
 let respuesta = descifrar(data[localStorageData.orden.ordenPalabras[localStorageData.orden.position]]);
+console.log(respuesta);
 let palabra = '';
 let contador = 0;
 let renglon = 0;

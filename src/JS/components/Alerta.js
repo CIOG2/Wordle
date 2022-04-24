@@ -1,4 +1,4 @@
-const GanasteAlerta = (respuesta) => {
+const Alerta = (respuesta) => {
     
     const palabra = document.createElement('h2')
     palabra.classList.add('container--alert-palabra');
@@ -19,4 +19,4 @@ const GanasteAlerta = (respuesta) => {
     return containerAlert;
 }
 
-export default GanasteAlerta;
+export default Alerta;
