@@ -1,12 +1,12 @@
 import { Validacion } from "./Logica.js";
 
-const RenderLetrasLocalStorage = (palabras) => {
+const RenderLetrasLocalStorage = (palabras, contenedorType) => {
     palabras.map((iteam) => {
         iteam.letras.forEach(element => {
-            Validacion(element);
+            Validacion(element,'TecladoLocalStorage', contenedorType);
         });
         if (iteam.checked) {
-            Validacion('TecladoLocalStorage');
+            Validacion('TecladoLocalStorage', contenedorType );
         }    
     })
 }

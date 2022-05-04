@@ -14,7 +14,7 @@
     }
 }
 
-@keyframes awaitAnimation {
+@keyframes awaitAnimationWin {
     0% {
         transform: translateY(0px);
     }
@@ -35,6 +35,36 @@
     }
     70% {
         transform: rotate(40deg);
+    }
+    85% {
+        transform: rotate(-30deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes awaitAnimationLose {
+    0% {
+        transform: translateY(0px);
+    }
+    10% {
+        transform: translateY(-5px);
+    }
+    20% {
+        transform: translateY(5px);
+    }
+    30% {
+        transform: translateY(0px) rotateY(360deg);
+    } 
+    40% {
+        transform: rotate(30deg);
+    }
+    55% {
+        transform: rotate(-30deg);
+    }
+    70% {
+        transform: rotate(30deg);
     }
     85% {
         transform: rotate(-30deg);

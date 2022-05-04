@@ -14,18 +14,18 @@ if (!(data === null)) {
 }
 
 const app = document.getElementById('app');
-app.append( Header(), ContenedorLetras(5), Letras(), Alerta('hola') );
+app.append( Header(), ContenedorLetras(5), Letras());
 
 
 if (!(data === null)) {
     if (Object.keys(data).includes('palabras')) {
-        RenderLetrasLocalStorage(data.palabras);
+        RenderLetrasLocalStorage(data.palabras, 'contenedor');
     }
 }
 document.onclick = (e) => {
-    Validacion(e, 'TecladoVirtual');
+    Validacion(e, 'TecladoVirtual', 'contenedor');
 }
 
 document.addEventListener('keydown', (e) => {
-    Validacion(e , 'TecladoFisico');
+    Validacion(e , 'TecladoFisico', 'contenedor');
 });

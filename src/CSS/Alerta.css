@@ -15,9 +15,8 @@
     flex-direction: column;
     gap: 15px;
     width: 90%;
-    height: 85%;
+    height: auto;
     max-width: 500px;
-    max-height: 700px;
     background-color: #cacaca;
     border-radius: 10px;
 }
@@ -28,7 +27,6 @@
     align-items: center;
     width: 100%;
     height: 130px;
-    background-color: #32ba7c;
     border-radius: 10px 10px 0 0;
     border-bottom: 2px solid white;
 }
@@ -79,13 +77,13 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 200px;
-    background-color: red;
+    height: auto;
 }
 
 .container__resultado--boton{
     width: 140px;
     height: 55px;
+    margin-bottom: 20px;
     font-size: 2rem;
     font-weight: 500;
     border-radius: 10px;
@@ -93,7 +91,3 @@
     cursor: pointer;
     box-shadow: 1px 1px 5px #0000009e;
 }
-
-
-
-

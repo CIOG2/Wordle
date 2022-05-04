@@ -5,6 +5,7 @@ import data from '../data/palabras.js';
 import NumerosAleatorios from "./NumerosAleatorios.js";
 import Limpieza from "./Limpieza.js";
 import Alerta from "../components/Alerta.js";
+import RenderLetrasLocalStorage from "./RenderLetrasLocalStorage.js";
 
 
 
@@ -34,10 +35,10 @@ if(localStorageData === null){
 
 
 let respuesta = descifrar(data[localStorageData.orden.ordenPalabras[localStorageData.orden.position]]);
-console.log(respuesta);
 let palabra = '';
 let contador = 0;
 let renglon = 0;
+let RENDER = true;
 const letras = [
     'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'Ñ', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
     'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'ñ', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
@@ -45,37 +46,36 @@ const letras = [
 
 
 
-const Validacion = (evento, tipoTeclado) => {
+const Validacion = (evento, tipoTeclado, contenedorType) => {
     if (tipoTeclado === 'TecladoFisico') {
         if (letras.includes(evento.key)) {
-            AgregarLetras(evento.key.toUpperCase(), tipoTeclado);
+            AgregarLetras(evento.key.toUpperCase(), tipoTeclado, contenedorType);
         } else if (evento.key == 'Enter' && contador == respuesta.length){
-            ValidarLetras(tipoTeclado);
+            ValidarLetras(tipoTeclado, 'contenedor');
         } else if (evento.key === 'Backspace' ){
             EliminarLetras();
         }
     } 
     else if (tipoTeclado === 'TecladoVirtual') {    
         if(evento.target.classList.contains('container__letras--button')){
-            AgregarLetras(evento.target.textContent, tipoTeclado);
+            AgregarLetras(evento.target.textContent, tipoTeclado, contenedorType);
         } else if (evento.target.id == 'botonDone' && contador == respuesta.length) {
-            ValidarLetras(tipoTeclado);
+            ValidarLetras(tipoTeclado, 'contenedor');
         } else if( evento.target.id === 'botonBorrar'){
             EliminarLetras();
         }
     } else {
         if (evento === 'TecladoLocalStorage') {
-            ValidarLetras('TecladoLocalStorage');
+            ValidarLetras(evento , tipoTeclado);
         } else {
-            AgregarLetras(evento, 'TecladoLocalStorage');
+            AgregarLetras(evento, tipoTeclado , contenedorType);
         }
     }
 }
 
-const AgregarLetras = (Letra, tipoTeclado) => {
+const AgregarLetras = (Letra, tipoTeclado, contenedorType) => {
     if(palabra.length < respuesta.length){
-        const contadorLetra = document.getElementById(`contenedor${renglon}`).childNodes[contador]; 
-
+        let contadorLetra = document.getElementById(`${contenedorType}${renglon}`).childNodes[contador]; 
         if (!(tipoTeclado === 'TecladoLocalStorage')) {
             contadorLetra.classList.add('AnimacionLetras');    
             setTimeout(() => {
@@ -94,22 +94,34 @@ const AgregarLetras = (Letra, tipoTeclado) => {
     }
 }
 
-const ValidarLetras = (tipoTeclado) => {    
+const ValidarLetras = (tipoTeclado, contenedorType) => {    
     if (palabra === respuesta) {
         palabra = palabra.split('');
         for (let i = 0; i < respuesta.length; i++) {                
-            let contenedor = document.getElementById(`contenedor${renglon}`).childNodes[i];
+            let contenedor = document.getElementById(`${contenedorType}${renglon}`).childNodes[i];
             contenedor.style.backgroundColor = 'rgb(0, 161, 0)';
-            document.getElementById(palabra[i]).style.backgroundColor = 'rgb(0, 161, 0)';
+            document.getElementById(palabra[i]).style.backgroundColor = 'rgb(0, 161, 0)';            
         }  
         setTimeout(() => {
-            const app = document.getElementById('app');
+            localStorageData = LocalStorage().get('Wordle');
+            renglon = 0;
             palabra = '';
             contador = 0;
-            renglon = 0;
-            app.appendChild(Alerta(respuesta));
+            const app = document.getElementById('app');
+            app.appendChild(Alerta(respuesta, true));
+            RenderLetrasLocalStorage(localStorageData.palabras, 'contenedorFake');
+            for (let i = 0; i < respuesta.length; i++) {                
+                let contenedor = document.getElementById(`contenedorFake${renglon}`).childNodes[i];
+                contenedor.style.backgroundColor = 'rgb(0, 161, 0)';
+                document.getElementById(palabra[i]).style.backgroundColor = 'rgb(0, 161, 0)';            
+            }   
             respuesta = descifrar(data[localStorageData.orden.ordenPalabras[parseInt(localStorageData.orden.position) + 1]]);
-            Limpieza();
+            renglon = 0;
+            palabra = '';
+            contador = 0;
+            setTimeout(() => {
+                Limpieza();
+            }, 200);
         }, 500); 
     } else {
         
@@ -118,23 +130,42 @@ const ValidarLetras = (tipoTeclado) => {
         palabra = palabra.split('');
         for (let i = 0; i < respuesta.length; i++) {                
             if (tipoTeclado === 'TecladoLocalStorage') {
-                validacionLetrasSinEfecto(palabra, res, i);
+                validacionLetrasSinEfecto(palabra, res, i, contenedorType);
             } else{
-                validacionLetrasEfecto(palabra, res, i);                    
+                if (contador === respuesta.length && renglon === 5) {
+                    validacionLetrasSinEfecto(palabra, res, i, contenedorType);
+                }else{
+                    validacionLetrasEfecto(palabra, res, i, contenedorType);                   
+                }
             }
         }
-        if (contador === respuesta.length && renglon === 5){
+        renglon++;
+        if (contador === respuesta.length && renglon === 6  ){
             setTimeout(() => {
-                swal(':(', 'Lo sentimos, perdiste el juego!', 'error');
-                contador = 0;
+                localStorageData = LocalStorage().get('Wordle');
+                renglon = 0;
                 palabra = '';
-                renglon= 0;
-                Limpieza();
-            }, 2500);
+                contador = 0;
+                const app = document.getElementById('app');
+                if (RENDER) {
+                    app.appendChild(Alerta(respuesta, false));
+                    RenderLetrasLocalStorage(localStorageData.palabras, 'contenedorFake');
+                    RENDER = false;
+                    setTimeout(() => {
+                        RENDER = true;
+                    }, 5000);
+                }
+                respuesta = descifrar(data[localStorageData.orden.ordenPalabras[parseInt(localStorageData.orden.position) + 1]]);
+                renglon = 0;
+                palabra = '';
+                contador = 0;
+                setTimeout(() => {
+                    Limpieza();
+                }, 200);
+            }, 1000);
         }
         contador = 0;
         palabra = '';
-        renglon++;
     }
 }
 
@@ -178,12 +209,16 @@ const validacionLetrasEfecto = (palabra, res, i) => {
             letraContenedorColor.style.backgroundColor = 'rgb(0, 161, 0)';
         }
         document.getElementById(`contenedor${renglon-1}`).childNodes[i].classList.add('efecto-de-rotacion');
+        setTimeout(() => {
+            document.getElementById(`contenedor${renglon-1}`).childNodes[i].classList.remove('efecto-de-rotacion');
+        }, 1000);
     }, 450 * i);
 }
 
 
-const validacionLetrasSinEfecto = (palabra, res, i) => {
-        let contenedor = document.getElementById(`contenedor${renglon}`).childNodes[i];
+const validacionLetrasSinEfecto = (palabra, res, i, contenedorType) => {
+        let contenedor = document.getElementById(`${contenedorType}${renglon}`).childNodes[i];
+
         let letraContenedorColor = document.getElementById(palabra[i]);
         
         if(res.includes(palabra[i])){
