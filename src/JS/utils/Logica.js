@@ -4,6 +4,8 @@ import { descifrar } from "./CifrarTexto.js";
 import data from '../data/palabras.js';
 import NumerosAleatorios from "./NumerosAleatorios.js";
 import Limpieza from "./Limpieza.js";
+import Alerta from "../components/Alerta.js";
+
 
 
 let localStorageData = LocalStorage().get('Wordle');
@@ -101,10 +103,11 @@ const ValidarLetras = (tipoTeclado) => {
             document.getElementById(palabra[i]).style.backgroundColor = 'rgb(0, 161, 0)';
         }  
         setTimeout(() => {
-            swal('Easy', 'Felicidades, Ganaste el juego!', 'success');
+            const app = document.getElementById('app');
             palabra = '';
             contador = 0;
             renglon = 0;
+            app.appendChild(Alerta(respuesta));
             respuesta = descifrar(data[localStorageData.orden.ordenPalabras[parseInt(localStorageData.orden.position) + 1]]);
             Limpieza();
         }, 500); 

@@ -6,7 +6,6 @@ import LocalStorage from "./utils/LocalStorage.js";
 import RenderLetrasLocalStorage from "./utils/RenderLetrasLocalStorage.js";
 import Alerta from "./components/Alerta.js";
 
-
 const data = LocalStorage().get('Wordle');
 if (!(data === null)) {
     if (data[0]) {
@@ -15,7 +14,7 @@ if (!(data === null)) {
 }
 
 const app = document.getElementById('app');
-app.append( Header(), ContenedorLetras(5), Letras());
+app.append( Header(), ContenedorLetras(5), Letras(), Alerta('hola') );
 
 
 if (!(data === null)) {
